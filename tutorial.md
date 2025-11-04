@@ -34,7 +34,7 @@ gcloud auth application-default login --no-launch-browser
 
 ## Step 1-2. プロジェクト ID の設定
 
-次に, 使用する Google Cloud プロジェクト ID とリージョンを設定します.
+次に, 使用する Google Cloud プロジェクト ID を設定します.
 
 ```bash
 gcloud config set project PLEASE_SPECIFY_YOUR_PROJECT_ID
@@ -47,7 +47,7 @@ gcloud config set project PLEASE_SPECIFY_YOUR_PROJECT_ID
 gcloud config get-value project
 ```
 
-設定したプロジェクト ID とリージョンは, 後ほど使用するため環境変数に設定しておきます.
+設定したプロジェクト ID は, 後ほど使用するため環境変数に設定しておきます.
 
 ```bash
 export GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
@@ -58,10 +58,9 @@ export GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
 このハンズオンで利用する Google Cloud の API を有効化します.
 
 ```bash
-gcloud services enable aiplatform.googleapis.com \
-    discoveryengine.googleapis.com \
-    run.googleapis.com \
-    cloudbuild.googleapis.com
+gcloud services \
+  enable aiplatform.googleapis.com \
+  discoveryengine.googleapis.com
 ```
 
 ## Step 2. Vertex AI Search のためのデータ準備
