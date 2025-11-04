@@ -89,7 +89,7 @@ gcloud storage cp ja-google-cloud-terms-of-service.pdf ${BUCKET_NAME}/
 
 ### Step 3-1. AI Applications へ移動
 
-![https://console.cloud.google.com/gen-app-builder/?hl=ja](https://console.cloud.google.com/gen-app-builder/?hl=ja) Google Cloud コンソールの "AI Applications" のページに飛びます
+[https://console.cloud.google.com/gen-app-builder/?hl=ja](https://console.cloud.google.com/gen-app-builder/?hl=ja) Google Cloud コンソールの "AI Applications" のページに飛びます
 
 ### Step 3-1. データストアの作成
 
