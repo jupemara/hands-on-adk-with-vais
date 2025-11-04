@@ -65,23 +65,13 @@ gcloud services \
 
 ## Step 2. Vertex AI Search のためのデータ準備
 
-Vertex AI Search で RAG を行うためのデータを準備します. 今回は Google Cloud の利用規約 (日本語) の PDF をデータソースとして利用します.
+### Step 2-1. Google Cloud Storage Bucket の作成
 
-### Step 2-1. データソースのダウンロード
-
-まず, データソースとなる PDF ファイルをダウンロードします.
+PDF ファイルを格納するための GCS バケットを作成します.
 
 ```bash
-wget https://services.google.com/fh/files/misc/ja-google-cloud-terms-of-service.pdf -O gcp_tos_jp.pdf
-```
-
-### Step 2-2. Google Cloud Storage (GCS) バケットの作成
-
-ダウンロードしたファイルをアップロードするための GCS バケットを作成します. バケット名は全世界でユニークである必要があるため, プロジェクト ID を含めた名前にします.
-
-```bash
-export BUCKET_NAME="${GOOGLE_CLOUD_PROJECT}-adk-vais-bucket"
-gcloud storage buckets create gs://${BUCKET_NAME} --location=${GOOGLE_CLOUD_LOCATION}
+export BUCKET_NAME=gs://${GOOGLE_CLOUD_PROJECT}-adk-vais-bucket-$(date +%Y-%m-%dT%H)
+gcloud storage buckets create ${BUCKET_NAME} --location=us-central1
 ```
 
 ### Step 2-3. GCS へのファイルアップロード
@@ -89,7 +79,7 @@ gcloud storage buckets create gs://${BUCKET_NAME} --location=${GOOGLE_CLOUD_LOCA
 作成したバケットに, 先ほどダウンロードした PDF ファイルをアップロードします.
 
 ```bash
-gcloud storage cp gcp_tos_jp.pdf gs://${BUCKET_NAME}/
+gcloud storage cp ja-google-cloud-terms-of-service.pdf gs://${BUCKET_NAME}/
 ```
 
 ## Step 3. Vertex AI Search の設定
