@@ -1,31 +1,36 @@
-title: "Vertex AI Search と ADK を用いた RAG Agent ハンズオン"
+title: "Vertex AI Search と ADK を用いた RAG Agent 作成ハンズオン"
 description: "Vertex AI Search を用いて RAG を構築し, ADK を使って AI Agent を開発するハンズオンです"
 duration: 60
 level: Beginner
 tags: [Vertex AI Search, ADK, AI Agent, Python, RAG]
 ---
 
-# Vertex AI Search と ADK を用いた RAG Agent ハンズオン
+# Vertex AI Search と ADK を用いた RAG Agent 作成ハンズオン
 
-このハンズオンでは, Vertex AI Search を用いて RAG (Retrieval Augmented Generation) を構築し, ADK (Agent Development Kit) を使って AI Agent を開発します.
+このハンズオンでは, Vertex AI Search を用いて RAG を構築し, RAG を用いた AI Agent 開発を ADK を用いて行います.
 
 ## Step 1. Google Cloud 環境のセットアップ
 
-はじめに, ハンズオンを進めるための Google Cloud 環境のセットアップを行います.
+- Google アカウント認証
+- プロジェクトの設定
+- リージョンの設定
+- 必要な API の有効化
 
-### Step 1-1. Google Cloud 認証情報の確認
+## Step 1-1. Google アカウント 認証
 
-まず, `gcloud` コマンドラインツールが Google Cloud アカウントで認証されていることを確認します.
+以下のコマンドで現在の認証情報を確認します
 
 ```bash
 gcloud auth list
 ```
 
-アクティブなアカウントが表示されれば OK です. もしアカウントが認証されていない場合は, 以下のコマンドを実行してログインしてください.
+想定しているログインアカウントが表示されれば OK です. もしアカウントが認証されていない場合は,
 
 ```bash
 gcloud auth application-default login --no-launch-browser
 ```
+
+を実行してログインを行います (ログイン URL が出てくるので, URL をクリック, verification code を入力しましょう)
 
 ### Step 1-2. プロジェクト ID とリージョンの設定
 
