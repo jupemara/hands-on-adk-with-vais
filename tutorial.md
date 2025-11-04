@@ -118,6 +118,16 @@ gcloud storage cp ja-google-cloud-terms-of-service.pdf ${BUCKET_NAME}/
 
 ### Step 4-1. Python 環境のセットアップ
 
+PATH を通して `adk` コマンドを叩くために仮想環境を用意します
+
+```bash
+python -m venv .venv
+```
+
+```bash
+source .venv/bin/activate
+```
+
 必要な Python ライブラリをインストールします.
 
 ```bash
