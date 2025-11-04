@@ -93,45 +93,23 @@ gcloud storage cp ja-google-cloud-terms-of-service.pdf ${BUCKET_NAME}/
 
 ### Step 3-2. データストアの作成
 
-画面左側の "データストア" をクリックします
-[https://console.cloud.google.com/gen-app-builder/data-stores](https://console.cloud.google.com/gen-app-builder/data-stores) こちらのリンクからも飛べます
-
-まず, GCS にアップロードした PDF ファイルを読み込むためのデータストアを作成します.
-
-```bash
-export DATA_STORE_ID="gcp-tos-jp-datastore"
-gcloud alpha enterprise-search datastores create \
-    --display-name="GCP Terms of Service (JP)" \
-    --location=${GOOGLE_CLOUD_LOCATION} \
-    --id=${DATA_STORE_ID} \
-    --content-config=unstructured
-```
-
-### Step 3-2. データストアに GCS データをインポート
-
-作成したデータストアに, GCS 上の PDF ファイルをインポートします.
-
-```bash
-gcloud alpha enterprise-search datastores import-documents \
-    --location=${GOOGLE_CLOUD_LOCATION} \
-    --data-store=${DATA_STORE_ID} \
-    --gcs-uri="gs://${BUCKET_NAME}/gcp_tos_jp.pdf"
-```
-
-インポートには数分かかる場合があります.
-
-### Step 3-3. RAG Engine (App) の作成
-
-最後に, 作成したデータストアを利用する RAG Engine (App) を作成します.
-
-```bash
-export ENGINE_ID="gcp-tos-jp-engine"
-gcloud alpha enterprise-search apps create \
-    --display-name="GCP Terms of Service Engine (JP)" \
-    --location=${GOOGLE_CLOUD_LOCATION} \
-    --id=${ENGINE_ID} \
-    --data-store-ids=${DATA_STORE_ID}
-```
+1. 画面左側の "データストア" をクリックします
+  - [https://console.cloud.google.com/gen-app-builder/data-stores?hl=ja](https://console.cloud.google.com/gen-app-builder/data-stores?hl=ja) こちらのリンクからも飛べます
+1. "データストアを作成" をクリックします
+1. ソースから Cloud Storage を選択します ( "Cloud Storage のデータをインポート" という画面になります )
+  - 特殊データのインポート: `非構造化ドキュメント（PDF、HTML、TXT など）`
+  - 同期の頻度: `1 回限り`
+  - インポートするフォルダまたはファイルを選択します: "前の手順でアップロードした GCS のファイルへのパスを参照"
+  - "続行" をクリック
+1. "構成" ページ
+  - データストアのロケーション: `global`
+  - データストア名: "任意のものをご入力ください"
+  - `ドキュメント処理オプション` をクリック
+    - ドキュメントチャンキング
+      - 高度なチャンク構成を有効にする: `true`
+      - チャンクサイズの上限: 500
+      - チャンクに上位の見出しを含める: `true`
+    - "作成" をクリック
 
 ## Step 4. ADK Agent の作成と実行
 
