@@ -76,7 +76,7 @@ gcloud storage buckets create ${BUCKET_NAME} --location=us-central1
 
 ### Step 2-3. GCS へのファイルアップロード
 
-作成したバケットに, 先ほどダウンロードした PDF ファイルをアップロードします.
+作成したバケットに, PDF ファイル ( Google Cloud の利用規約 ) をアップロードします.
 
 ```bash
 gcloud storage cp ja-google-cloud-terms-of-service.pdf ${BUCKET_NAME}/
@@ -84,7 +84,12 @@ gcloud storage cp ja-google-cloud-terms-of-service.pdf ${BUCKET_NAME}/
 
 ## Step 3. Vertex AI Search の設定
 
-次に, アップロードしたデータを元に Vertex AI Search のデータストアとアプリ (RAG Engine) を作成します.
+アップロードした PDF を元に Vertex AI Search のデータストアと検索インデックスを作成します.
+( 手順としては [https://cloud.google.com/generative-ai-app-builder/docs/create-data-store-es?hl=ja#cloud-storage](https://cloud.google.com/generative-ai-app-builder/docs/create-data-store-es?hl=ja#cloud-storage) こちらを使います )
+
+### Step 3-1. AI Applications へ移動
+
+![https://console.cloud.google.com/gen-app-builder/?hl=ja](https://console.cloud.google.com/gen-app-builder/?hl=ja) Google Cloud コンソールの "AI Applications" のページに飛びます
 
 ### Step 3-1. データストアの作成
 
