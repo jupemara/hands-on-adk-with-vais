@@ -129,6 +129,10 @@ pip install google-adk
 `agents/agent.py` に今回利用する AI Agent のコードがあります.
 ざっくり読んでみて雰囲気を感じ取ってみてください...
 
+```bash
+cloudshell edit agents/agent.py
+```
+
 ## Step 4-3. Agent の実行
 
 読んでみたら, 非常にシンプルなことがわかったと思います.
