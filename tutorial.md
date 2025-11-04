@@ -91,7 +91,10 @@ gcloud storage cp ja-google-cloud-terms-of-service.pdf ${BUCKET_NAME}/
 
 [https://console.cloud.google.com/gen-app-builder/?hl=ja](https://console.cloud.google.com/gen-app-builder/?hl=ja) Google Cloud コンソールの "AI Applications" のページに飛びます
 
-### Step 3-1. データストアの作成
+### Step 3-2. データストアの作成
+
+画面左側の "データストア" をクリックします
+[https://console.cloud.google.com/gen-app-builder/data-stores](https://console.cloud.google.com/gen-app-builder/data-stores) こちらのリンクからも飛べます
 
 まず, GCS にアップロードした PDF ファイルを読み込むためのデータストアを作成します.
 
