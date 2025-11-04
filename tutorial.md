@@ -70,7 +70,7 @@ gcloud services \
 PDF ファイルを格納するための GCS バケットを作成します.
 
 ```bash
-export BUCKET_NAME=gs://${GOOGLE_CLOUD_PROJECT}-adk-vais-bucket-$(date +%Y-%m-%dT%H)
+export BUCKET_NAME=gs://${GOOGLE_CLOUD_PROJECT}-adk-vais-bucket-$(date +%Y-%m-%d)
 gcloud storage buckets create ${BUCKET_NAME} --location=us-central1
 ```
 
@@ -79,7 +79,7 @@ gcloud storage buckets create ${BUCKET_NAME} --location=us-central1
 作成したバケットに, 先ほどダウンロードした PDF ファイルをアップロードします.
 
 ```bash
-gcloud storage cp ja-google-cloud-terms-of-service.pdf gs://${BUCKET_NAME}/
+gcloud storage cp ja-google-cloud-terms-of-service.pdf ${BUCKET_NAME}/
 ```
 
 ## Step 3. Vertex AI Search の設定
