@@ -110,65 +110,43 @@ gcloud storage cp ja-google-cloud-terms-of-service.pdf ${BUCKET_NAME}/
             - チャンクサイズの上限: 500
             - チャンクに上位の見出しを含める: `true`
     - "作成" をクリック
+5. 作成したデータストアのページに飛ぶと, インポートの詳細や進捗について確認できます
 
 ## Step 4. ADK Agent の作成と実行
 
-次に, 作成した Vertex AI Search の RAG Engine を利用する ADK Agent を作成します.
+ドキュメントのインポート ( インデクシング/チャンク化 ) には少々時間がかかるので, その間にそのデータストアを RAG として問い合わせができる AI Agent 作成を行います
 
 ### Step 4-1. Python 環境のセットアップ
 
-まず, Agent を実行するための Python 仮想環境をセットアップします.
+必要な Python ライブラリをインストールします.
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-次に, 必要な Python ライブラリをインストールします.
-
-```bash
-pip install google-adk google-cloud-aiplatform
+pip install google-adk
 ```
 
 ### Step 4-2. Agent のコード作成
 
-`agents/agent.py` ファイルに以下のコードを記述します. この Agent は, ADK に組み込まれている `VertexAiSearchTool` を利用して, 先ほど作成した RAG Engine に問い合わせを行います.
+`agents/agent.py` に今回利用する AI Agent のコードがあります.
+ざっくり読んでみて雰囲気を感じ取ってみてください...
+
+## Step 4-3. Agent の実行
+
+読んでみたら, 非常にシンプルなことがわかったと思います.
+Vertex AI Search で Data Store を作成するとたった 20 行ほどで, 任意のドキュメントを RAG する AI Agent の作成が可能です!!
 
 ```python
-import os
-from adk.adk import ADK
-from adk.config import ToolConfig
-from adk.tools import VertexAiSearchTool
-
-engine_id = os.environ.get("ENGINE_ID")
-if not engine_id:
-    raise ValueError("ENGINE_ID environment variable must be set.")
-
-tool_config = ToolConfig(
-    [VertexAiSearchTool(engine_id=engine_id)]
-)
-
-if __name__ == "__main__":
-    ADK(tool_config=tool_config).run()
+data_store_id="REPLACE_WITH_YOUR_DATASTORE_ID"
 ```
 
-### Step 4-3. Agent の実行
-
-環境変数 `ENGINE_ID` に作成した RAG Engine の ID を設定し, Agent を起動します.
+の部分を先程作成したご自身の ID と置き換えてください
 
 ```bash
-export ENGINE_ID="gcp-tos-jp-engine"
-adk run .
+adk web --port 8080
 ```
+
+右上の Web Preview から 8080 番を見に行きましょう!!
 
 ## Step 5. Agent との対話
 
 Agent が起動したら, 質問をしてみましょう. Google Cloud の利用規約に関する内容であれば, Agent が回答を生成します.
-
-以下に質問の例を挙げます.
-
-- "Google Cloud の利用規約について教えてください。"
-- "料金はどのように発生しますか？"
-- "サービスの終了に関する条項を教えてください。"
-
-自由に質問をしてみてください.
+また, 関係のない質問をするとどうなるでしょうか??
