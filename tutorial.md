@@ -32,25 +32,28 @@ gcloud auth application-default login --no-launch-browser
 
 を実行してログインを行います (ログイン URL が出てくるので, URL をクリック, verification code を入力しましょう)
 
-### Step 1-2. プロジェクト ID とリージョンの設定
+## Step 1-2. プロジェクト ID の設定
 
 次に, 使用する Google Cloud プロジェクト ID とリージョンを設定します.
 
 ```bash
 gcloud config set project PLEASE_SPECIFY_YOUR_PROJECT_ID
-gcloud config set run/region us-central1
 ```
 
 `PLEASE_SPECIFY_YOUR_PROJECT_ID` の部分は, ご自身のプロジェクト ID に置き換えてください.
+念の為, 正しく設定されているか確認しましょう.
+
+```bash
+gcloud config get-value project
+```
 
 設定したプロジェクト ID とリージョンは, 後ほど使用するため環境変数に設定しておきます.
 
 ```bash
 export GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
-export GOOGLE_CLOUD_LOCATION=us-central1
 ```
 
-### Step 1-3. 必要な API の有効化
+## Step 1-3. 必要な API の有効化
 
 このハンズオンで利用する Google Cloud の API を有効化します.
 
