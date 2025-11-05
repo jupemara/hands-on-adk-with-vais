@@ -70,7 +70,7 @@ gcloud services \
 PDF ファイルを格納するための GCS バケットを作成します.
 
 ```bash
-export BUCKET_NAME=gs://${GOOGLE_CLOUD_PROJECT}-adk-vais-bucket-$(date +%Y-%m-%d)
+export BUCKET_NAME=gs://${GOOGLE_CLOUD_PROJECT}-adk-vais-bucket-$(date +%s%N)
 gcloud storage buckets create ${BUCKET_NAME} --location=us-central1
 ```
 
